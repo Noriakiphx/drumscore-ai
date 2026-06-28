@@ -17,3 +17,21 @@ outputs/
 *.aiff
 *.flac
 *.mid
+
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# Runtime files
+uploads/
+outputs/
+*.wav
+*.mp3
+*.m4a
+*.mid
+.env
