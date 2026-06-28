@@ -1,0 +1,43 @@
+from app.models.score import DrumInstrument
+
+GM_DRUM_MAP = {
+    DrumInstrument.kick: 36,
+    DrumInstrument.snare: 38,
+    DrumInstrument.snare_ghost: 38,
+    DrumInstrument.rimshot: 40,
+    DrumInstrument.cross_stick: 37,
+    DrumInstrument.hihat_closed: 42,
+    DrumInstrument.hihat_open: 46,
+    DrumInstrument.hihat_pedal: 44,
+    DrumInstrument.ride: 51,
+    DrumInstrument.ride_bell: 53,
+    DrumInstrument.crash: 49,
+    DrumInstrument.splash: 55,
+    DrumInstrument.china: 52,
+    DrumInstrument.tom_high: 50,
+    DrumInstrument.tom_mid: 47,
+    DrumInstrument.tom_floor: 43,
+}
+
+REVERSE_GM_DRUM_MAP = {
+    35: DrumInstrument.kick,
+    36: DrumInstrument.kick,
+    37: DrumInstrument.cross_stick,
+    38: DrumInstrument.snare,
+    39: DrumInstrument.snare,
+    40: DrumInstrument.rimshot,
+    42: DrumInstrument.hihat_closed,
+    44: DrumInstrument.hihat_pedal,
+    46: DrumInstrument.hihat_open,
+    49: DrumInstrument.crash,
+    51: DrumInstrument.ride,
+    52: DrumInstrument.china,
+    53: DrumInstrument.ride_bell,
+    55: DrumInstrument.splash,
+    41: DrumInstrument.tom_floor,
+    43: DrumInstrument.tom_floor,
+    45: DrumInstrument.tom_mid,
+    47: DrumInstrument.tom_mid,
+    48: DrumInstrument.tom_high,
+    50: DrumInstrument.tom_high,
+}

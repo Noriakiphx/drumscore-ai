@@ -1,0 +1,16 @@
+{
+  "title": "Man and Woman",
+  "artist": "Chage & Aska",
+  "average_bpm": 82.0,
+  "time_signature": "4/4",
+  "tempo_map": [
+    {"time_sec": 0.0, "beat_index": 0, "bpm": 82.1},
+    {"time_sec": 0.731, "beat_index": 1, "bpm": 81.9}
+  ],
+  "bars": [
+    {"number": 1, "start_sec": 0.0, "end_sec": 2.926, "chord": "C", "section": "Intro"}
+  ],
+  "drum_events": [
+    {"time_sec": 0.0, "bar": 1, "beat": 1.0, "instrument": "kick", "velocity": 100, "confidence": 0.82}
+  ]
+}

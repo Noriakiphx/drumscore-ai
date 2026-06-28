@@ -1,0 +1,11 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.19
+pydantic==2.10.3
+pydantic-settings==2.6.1
+soundfile==0.12.1
+librosa==0.10.2.post1
+numpy==2.0.2
+pretty_midi==0.2.10
+# demucsはGPU環境で別途インストール推奨:
+# pip install demucs
