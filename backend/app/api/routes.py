@@ -1,7 +1,7 @@
 from pathlib import Path
-from uuid import uuid4
+from uuid import UUID, uuid4
 
-from fastapi import APIRouter, UploadFile, File, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, BackgroundTasks, HTTPException
 from fastapi.responses import FileResponse
 
 from app.services.jobs import job_store
@@ -16,22 +16,30 @@ EXPORT_DIR.mkdir(parents=True, exist_ok=True)
 @router.post("/jobs")
 async def create_job(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
     data = await file.read()
-    job = job_store.create_job(file.filename, data)
+    try:
+        job = job_store.create_job(file.filename, data)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail="Invalid upload filename") from exc
     background_tasks.add_task(job_store.process_job, job["job_id"])
     return job
 
 @router.get("/jobs/{job_id}")
-def get_job(job_id: str):
-    return job_store.get_job(job_id)
+def get_job(job_id: UUID):
+    return job_store.get_job(str(job_id))
 
 @router.get("/jobs/{job_id}/score")
-def get_score(job_id: str):
-    return job_store.get_score(job_id)
+def get_score(job_id: UUID):
+    return job_store.get_score(str(job_id))
 
 @router.get("/jobs/{job_id}/stems/drums")
-def get_drums_stem(job_id: str):
-    meta = job_store.get_job(job_id)
-    return FileResponse(meta["drums_path"], media_type="audio/wav", filename="drums.wav")
+def get_drums_stem(job_id: UUID):
+    try:
+        path = job_store.get_drums_path(str(job_id))
+    except (FileNotFoundError, KeyError) as exc:
+        raise HTTPException(status_code=404, detail="Drums stem is not available") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail="Invalid job output") from exc
+    return FileResponse(path, media_type="audio/wav", filename="drums.wav")
 
 @router.post("/convert/score-to-midi")
 def convert_score_to_midi(score: ScoreJSON):
